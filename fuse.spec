@@ -1,11 +1,11 @@
 Summary:	Filesystem in Userspace
 Name:		fuse
-Version:	2.9.1
+Version:	2.9.3
 Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	http://downloads.sourceforge.net/fuse/%{name}-%{version}.tar.gz
-# Source0-md5:	c646133c7bbf8ad9d2ced0888dc4a319
+# Source0-md5:	33cae22ca50311446400daf8a6255c6a
 Source1:	%{name}.conf
 URL:		http://fuse.sourceforge.net/
 BuildRequires:	autoconf
@@ -41,6 +41,8 @@ Libfuse library header files.
 %prep
 %setup -q
 
+%{__sed} -i "s|/sbin|%{_sbindir}|" configure.ac
+
 %build
 %{__libtoolize} --automake
 %{__aclocal}
@@ -66,7 +68,7 @@ done
 install fuse.pc $RPM_BUILD_ROOT%{_pkgconfigdir}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}
 
-rm -rf $RPM_BUILD_ROOT/etc/{init.d,udev}
+%{__rm} -r $RPM_BUILD_ROOT/etc/{init.d,udev}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -89,7 +91,7 @@ fi
 
 %attr(4754,root,fuse) %{_bindir}/fusermount
 %attr(4754,root,fuse) %{_bindir}/ulockmgr_server
-%attr(755,root,root) /sbin/mount.fuse
+%attr(755,root,root) %{_sbindir}/mount.fuse
 
 %files libs
 %defattr(644,root,root,755)
