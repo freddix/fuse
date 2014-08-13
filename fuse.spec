@@ -1,7 +1,7 @@
 Summary:	Filesystem in Userspace
 Name:		fuse
 Version:	2.9.3
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/System
 Source0:	http://downloads.sourceforge.net/fuse/%{name}-%{version}.tar.gz
@@ -50,6 +50,7 @@ Libfuse library header files.
 %{__autoconf}
 %{__automake}
 %configure \
+	--disable-example	\
 	--disable-silent-rules	\
 	--disable-static	\
 	--enable-lib		\
