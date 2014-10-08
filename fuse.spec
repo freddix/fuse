@@ -1,7 +1,7 @@
 Summary:	Filesystem in Userspace
 Name:		fuse
 Version:	2.9.3
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Applications/System
 Source0:	http://downloads.sourceforge.net/fuse/%{name}-%{version}.tar.gz
@@ -70,6 +70,7 @@ install fuse.pc $RPM_BUILD_ROOT%{_pkgconfigdir}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}
 
 %{__rm} -r $RPM_BUILD_ROOT/etc/{init.d,udev}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -105,8 +106,6 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libfuse.so
 %attr(755,root,root) %{_libdir}/libulockmgr.so
-%{_libdir}/libfuse.la
-%{_libdir}/libulockmgr.la
 %{_includedir}/fuse
 %{_includedir}/*.h
 %{_pkgconfigdir}/fuse.pc
